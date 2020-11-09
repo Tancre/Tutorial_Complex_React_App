@@ -38,7 +38,7 @@ function Main() {
           <About />
         </Route>
         <Route path="/create-post">
-          <CreatePost addFlashMessages={addFlashMessages} />
+          <CreatePost addFlashMessage={addFlashMessage} />
         </Route>
         <Route path="/terms">
           <Terms />

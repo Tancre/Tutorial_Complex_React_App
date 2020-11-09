@@ -12,7 +12,7 @@ function CreatePost(props) {
     try {
       const response = await Axios.post("/create-post", { title, body, token: localStorage.getItem("complexappToken") })
       // Redirect to new post url
-      props.addFlashMessages("Congrats! You successfully create a post.")
+      props.addFlashMessage("Congrats! You successfully create a post.")
       props.history.push(`/post/${response.data}`)
       console.log("New post was created.")
     } catch {
