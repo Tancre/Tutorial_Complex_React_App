@@ -9,7 +9,7 @@ import ReactTooltip from "react-tooltip"
 function ViewSinglePost() {
   const { id } = useParams()
   const [isLoading, setIsLoading] = useState(true)
-  const [post, setPost] = useState([])
+  const [post, setPost] = useState()
 
   useEffect(() => {
     const ourRequest = Axios.CancelToken.source()
@@ -37,7 +37,7 @@ function ViewSinglePost() {
     )
 
   const date = new Date(post.createdDate)
-  const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getYear()}`
+  const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
 
   return (
     <Page title={post.title}>
@@ -48,7 +48,7 @@ function ViewSinglePost() {
             <i className="fas fa-edit"></i>
           </Link>
           <ReactTooltip id="edit" className="custom-tooltip" />{" "}
-          <a className="delete-post-button text-danger" data-tip="Delete" data-for="delete">
+          <a data-tip="Delete" data-for="delete" className="delete-post-button text-danger">
             <i className="fas fa-trash"></i>
           </a>
           <ReactTooltip id="delete" className="custom-tooltip" />

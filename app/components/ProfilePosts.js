@@ -3,21 +3,21 @@ import Axios from "axios"
 import { useParams, Link } from "react-router-dom"
 import LoadingDotsIcon from "./LoadingDotsIcon"
 
-function ProfilePosts() {
+function ProfilePosts(props) {
   const { username } = useParams()
   const [isLoading, setIsLoading] = useState(true)
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
-    async function fetchPosts() {
-      const ourRequest = Axios.CancelToken.source()
+    const ourRequest = Axios.CancelToken.source()
 
+    async function fetchPosts() {
       try {
         const response = await Axios.get(`/profile/${username}/posts`, { cancelToken: ourRequest.token })
         setPosts(response.data)
         setIsLoading(false)
       } catch (e) {
-        console.log("There was a problem or the request was cancelled.")
+        console.log("There was a problem.")
       }
     }
     fetchPosts()
@@ -32,7 +32,7 @@ function ProfilePosts() {
     <div className="list-group">
       {posts.map(post => {
         const date = new Date(post.createdDate)
-        const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getYear()}`
+        const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
 
         return (
           <Link key={post._id} to={`/post/${post._id}`} className="list-group-item list-group-item-action">
